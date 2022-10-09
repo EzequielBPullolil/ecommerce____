@@ -1,9 +1,18 @@
 const productRouter = require('express').Router()
 
-productRouter.post('/', (req,res)=>{
-    return res.status(201).json({
-            productID: 'abcdfgh'
-    })
+const UploadProduct = require('./services/upload_product')
+
+productRouter.post('/', async (req,res)=>{
+    try {
+        const {productID} = await UploadProduct(req.body);
+        return res.status(201).json({
+            productID,
+            status: 'product created'
+        })
+    }catch(err){
+        console.error(err)
+    }
+    
 })
 
 
