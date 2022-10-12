@@ -1,9 +1,10 @@
-const e = require("express")
-
+const {v4: uuid} = require('uuid')
 module.exports = (sequelize, DataTypes) => {
     const product = sequelize.define('products',{
         productID: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            defaultValue: uuid(),
+            primaryKey: true
         },
         name: {
             type: DataTypes.STRING
