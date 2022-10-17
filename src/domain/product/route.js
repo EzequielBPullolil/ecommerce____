@@ -2,6 +2,7 @@ const productRouter = require('express').Router()
 
 const UploadProduct = require('./services/upload_product')
 const UpdateProduct = require('./services/update_product')
+const DetailProduct = require('./services/detail_product')
 
 productRouter.post('/', async (req,res)=>{
     try {
@@ -31,6 +32,14 @@ productRouter.route("/:id")
             return res.status(400).json(err)
         }
         
+    })
+    .get(async(req,res)=>{
+        try{
+            const product = await DetailProduct(req.params.id)
+            return res.status(200).json(product)
+        }catch(err){
+            return res.status(400).json(err)
+        }
     })
 
 module.exports = productRouter;

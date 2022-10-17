@@ -21,8 +21,7 @@ describe('Product route test', () => {
                 done()
             })
     });
-    describe('products/:id', () => {
-
+    describe('products/:id', () => {     
         it('PUT (update product)', (done) => {
             const newProductFields = {
                 name: 'new product name',
@@ -38,6 +37,20 @@ describe('Product route test', () => {
                     expect(res).to.have.status(200)
                     expect(res.body).to.have.property('product')
                     expect(res.body).to.have.property('status').equal('product updated')
+                    done()
+                })
+        });
+        it('GET (detail product)', (done) => {
+            request(app)
+                .get(`/products/${createProductID}`)
+                .end((err,res)=>{
+                    if(err) done(err)
+
+                    expect(res).to.have.status(200)
+                    expect(res.body).to.have.property('name')
+                    expect(res.body).to.have.property('description')
+                    expect(res.body).to.have.property('price')
+                    expect(res.body).to.have.property('ID')
                     done()
                 })
         });
