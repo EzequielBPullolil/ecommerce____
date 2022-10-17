@@ -38,7 +38,6 @@ describe('Update product', () => {
     });
     it('Product updated', async() => {
         const [updatedProduct] = await sequelize.query(`select * from products where "ID"='${createdProduct.ID}'`, { type: QueryTypes.SELECT })
-        console.log(updatedProduct)
         expect(updatedProduct)
             .to
             .have

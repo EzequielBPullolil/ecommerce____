@@ -22,13 +22,22 @@ describe('Product route test', () => {
             })
     });
     describe('products/:id', () => {
+
         it('PUT (update product)', (done) => {
+            const newProductFields = {
+                name: 'new product name',
+                description: 'an updatedProduct in route test',
+                price: 10000000000
+            }
             request(app)
                 .put(`/products/${createProductID}`)
+                .send(newProductFields)
                 .end((err,res)=>{
                     if(err) done(err)
 
                     expect(res).to.have.status(200)
+                    expect(res.body).to.have.property('product')
+                    expect(res.body).to.have.property('status').equal('product updated')
                     done()
                 })
         });
